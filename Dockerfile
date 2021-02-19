@@ -2,7 +2,7 @@
 FROM registry.access.redhat.com/ubi8/ubi:8.0
 
 LABEL Component="httpd" \
-      Name=sillywebsite" \
+      Name="sillywebsite" \
       Version="1.0" \
       Release="1" \
       io.k8s.description="A basic Apache HTTP Server S2I builder image" \
@@ -26,7 +26,7 @@ ENV APP_DIRS /var/www/ /run/httpd/ /etc/httpd/logs/ /var/log/httpd/
 
 # TODO: Drop the root user and make the content of APP_DIRS owned by user 1001
 RUN chown -R 1001:1001 $APP_DIRS && \
-    chgrp -r 0 $APP_DIRS && \
+    chgrp -R 0 $APP_DIRS && \
     chmod -R g=u $APP_DIRS && \
     chmod +x /usr/libexec/s2i/assemble /usr/libexec/s2i/run /usr/libexec/s2i/usage
 
